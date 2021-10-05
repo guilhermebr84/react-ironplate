@@ -33,7 +33,7 @@ function Login(props) {
         JSON.stringify({ ...response.data })
       );
       setErrors({ password: "", email: "" });
-      props.history.push("/book/all");
+      props.history.push("/profile");
     } catch (err) {
       console.error(err.response);
       setErrors({ ...err.response.data.errors });
@@ -44,8 +44,9 @@ function Login(props) {
     <form onSubmit={handleSubmit}>
       <h1>Login</h1>
 
-      <div>
-        <label htmlFor="signupFormEmail">E-mail Address</label>
+      <div className="mb-3">
+        <label className="form-label" htmlFor="signupFormEmail">E-mail Address</label>
+        <div>
         <input
           type="email"
           name="email"
@@ -54,10 +55,12 @@ function Login(props) {
           error={errors.email}
           onChange={handleChange}
         />
+        </div>
       </div>
 
       <div>
         <label htmlFor="signupFormPassword">Password</label>
+        <div>
         <input
           type="password"
           name="password"
@@ -67,10 +70,12 @@ function Login(props) {
           onChange={handleChange}
         />
       </div>
+      </div>
 
       <div>
-        <button type="submit">Login!</button>
+        <p></p><button type="submit" to="/team">Login!</button>
 
+        <p></p>
         <Link to="/auth/signup">
           Don't have an account? Click here to signup!
         </Link>
