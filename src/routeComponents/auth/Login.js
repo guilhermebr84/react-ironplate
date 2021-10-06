@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import api from "../../apis/api";
-
+import Footer from "../../components/Footer"
 import { AuthContext } from "../../contexts/authContext";
 
 function Login(props) {
@@ -33,7 +33,7 @@ function Login(props) {
         JSON.stringify({ ...response.data })
       );
       setErrors({ password: "", email: "" });
-      props.history.push("/profile");
+      props.history.push("/profile/team/teamlist");
     } catch (err) {
       console.error(err.response);
       setErrors({ ...err.response.data.errors });
@@ -41,11 +41,11 @@ function Login(props) {
   }
 
   return (
+    <div className="container-login">
     <form onSubmit={handleSubmit}>
       <h1>Login</h1>
-
-      <div className="mb-3">
-        <label className="form-label" htmlFor="signupFormEmail">E-mail Address</label>
+      <div>
+        <label htmlFor="signupFormEmail">E-mail Address</label>
         <div>
         <input
           type="email"
@@ -76,11 +76,18 @@ function Login(props) {
         <p></p><button type="submit" to="/team">Login!</button>
 
         <p></p>
+        
         <Link to="/auth/signup">
           Don't have an account? Click here to signup!
         </Link>
+        <p></p>
+        <Link className="btn btn-lg btn-secondary mt-5" to="/">
+            Back to Home...
+          </Link>
       </div>
     </form>
+    <Footer />
+</div>
   );
 }
 

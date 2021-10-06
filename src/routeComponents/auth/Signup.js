@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../apis/api";
+import Footer from "../../components/Footer"
 
 function Signup(props) {
   const [state, setState] = useState({ name: "", password: "", email: "" });
@@ -32,6 +33,8 @@ function Signup(props) {
   }
 
   return (
+    <div>
+    <div className="container-sign">
     <form onSubmit={handleSubmit}>
       <h1>Signup!</h1>
 
@@ -117,8 +120,15 @@ function Signup(props) {
         <Link to="/auth/login">
           Already have an account? Click here to login.
         </Link>
+        <p></p>
+        <Link className="btn btn-lg btn-secondary mt-3" to="/">
+            Back to Home...
+          </Link>
       </div>
     </form>
+    </div>
+    <Footer />
+    </div>
   );
 }
 

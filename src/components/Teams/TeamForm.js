@@ -1,8 +1,26 @@
+import { useState, useEffect } from "react";
+import React from "react";
+import { MultiSelect } from "react-multi-select-component";
 import TextInput from "../TextInput";
 import ErrorMessage from "../ErrorMessage";
 import LoadingSpinner from "../LoadingSpinner";
+import api from "../../apis/api";
 
-function ProjectForm(props) {
+function TeamForm(props) {
+  const [players, setPlayers] = useState([]);
+
+  useEffect(() => {
+    async function fetchPlayers() {
+      try {
+        const response = await api.get("/playerslist");
+        setPlayers([...response.data]);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchPlayers();
+  }, []);
+
   return (
     <form onSubmit={props.handleSubmit}>
       <TextInput
@@ -15,44 +33,41 @@ function ProjectForm(props) {
 
       <div className="row">
         <div className="input-group mb-3">
-          <button
-            className="btn btn-outline-secondary dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Cities
-          </button>
-          <ul className="dropdown-menu">
-            <li>
-              <a className="dropdown-item">SÃO PAULO/SP</a>
-            </li>
-            <li>
-              <a className="dropdown-item">RIO DE JANEIRO/RJ</a>
-            </li>
-            <li>
-              <a className="dropdown-item">outros</a>
-            </li>
-          </ul>
-          <TextInput
-            className="form-control"
-            label="city"
-            id="teamFormCity"
-            name="city"
-            onChange={props.handleChange}
-            value={props.state.description}
-          />
+          <div className="input-group mb-3">
+            <label className="input-group-text" for="inputGroupSelect01">
+              From:
+            </label>
+            <select
+              className="form-select"
+              id="inputGroupSelect01"
+              name="city"
+              onChange={props.handleChange}
+              value={props.state.city}
+            >
+              <option selected>Choose a City.</option>
+              <option value="São Paulo/SP">São Paulo/SP</option>
+              <option value="Rio de Janeiro/RJ">Rio de Janeiro/RJ</option>
+              <option value="Porto Alegre/RS">Porto Alegre/RS</option>
+              <option value="Florianópolis/SC">Florianópolis/SC</option>
+              <option value="Vitória/ES">Vitória/ES</option>
+              <option value="Salvador/BA">Salvador/BA</option>
+            </select>
+          </div>
         </div>
 
         <div className="col-auto">
-          <TextInput
-            type="text"
-            label="players"
-            id="teamFormPlayers"
+          <select
+            className="form-select"
+            id="inputGroupSelect02"
+            multiple
             name="players"
             onChange={props.handleChange}
-            value={props.state.description}
-          />
+            value={props.state.players}
+          >
+            {players.map((player) => {
+              return <option value={player._id}>{player.name}</option>;
+            })}
+          </select>
         </div>
 
         <div className="col-auto">
@@ -80,4 +95,4 @@ function ProjectForm(props) {
   );
 }
 
-export default ProjectForm;
+export default TeamForm;

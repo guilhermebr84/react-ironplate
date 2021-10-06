@@ -9,7 +9,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <NavLink className="navbar-brand" to="/">
+        <NavLink className="navbar-brand" to="/profile">
           Home
         </NavLink>
         <button
@@ -33,21 +33,12 @@ function Navbar() {
                 className="nav-link"
                 activeClassName="active"
                 exact
-                to="/teams"
+                to="/profile/team/teamlist"
               >
                 Teams
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink
-                className="nav-link"
-                activeClassName="active"
-                exact
-                to="/teams/new"
-              >
-                New Team
-              </NavLink>
-            </li>
+            
             <li className="nav-item">
               <NavLink
                 className="nav-link"
@@ -58,16 +49,18 @@ function Navbar() {
                 Matches
               </NavLink>
             </li>
+
             <li>
               <NavLink
                 className="nav-link"
                 activeClassName="active"
                 exact
-                to="/matches/new"
+                to="/profile/matches/matchform"
               >
                 New Match
               </NavLink>
             </li>
+
             {loggedInUser.user._id ? (
               <li
                 className="nav-item d-flex align-items-center"

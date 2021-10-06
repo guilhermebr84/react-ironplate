@@ -26,10 +26,10 @@ function TeamCreate() {
 
     setLoading(true);
     api
-      .post("/project", state)
+      .post("/team", state)
       .then(() => {
         setLoading(false);
-        history.push("/teams");
+        history.push("/team");
       })
       .catch((err) => {
         console.error(err);
