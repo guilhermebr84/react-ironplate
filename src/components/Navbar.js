@@ -38,13 +38,24 @@ function Navbar() {
                 Teams
               </NavLink>
             </li>
+
+            <li className="nav-item">
+              <NavLink
+                className="nav-link"
+                activeClassName="active"
+                exact
+                to="/profile/team/teamcreate"
+              >
+                Create a Team
+              </NavLink>
+            </li>
             
             <li className="nav-item">
               <NavLink
                 className="nav-link"
                 activeClassName="active"
                 exact
-                to="/matches"
+                to="/profile/matches/matchcard"
               >
                 Matches
               </NavLink>
@@ -55,7 +66,7 @@ function Navbar() {
                 className="nav-link"
                 activeClassName="active"
                 exact
-                to="/profile/matches/matchform"
+                to="/profile/matches/matchcreate"
               >
                 New Match
               </NavLink>
@@ -75,13 +86,7 @@ function Navbar() {
           {/* Só exibe foto do avatar e nome do usuário se o mesmo estiver logado */}
           {loggedInUser.user._id ? (
             <div>
-              <span className="me-4">Hello, {loggedInUser.user.name}</span>
-              <img
-                style={{ width: "45px", height: "45px", objectFit: "cover" }}
-                className="img-fluid rounded-circle"
-                src={loggedInUser.user.pictureUrl}
-                alt="user"
-              />
+              <span className="me-4">Hello, {loggedInUser.user.name.toUpperCase()}</span>
             </div>
           ) : null}
         </div>

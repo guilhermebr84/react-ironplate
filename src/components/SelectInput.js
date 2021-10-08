@@ -11,8 +11,12 @@ function SelectInput(props) {
           required={props.required}
         >
           {props.items.map((item) => {
-            return <option key={item}>{item}</option>;
-          })}
+            if(typeof item === "object") {
+              return <option value={item.value} key={item}>{item.text}</option>;
+          }
+          else{
+            return <option value={item} key={item}>{item}</option>
+          }})}
         </select>
       </div>
     );

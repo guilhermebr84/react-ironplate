@@ -28,7 +28,7 @@ function TeamList() {
   }, []);
 
   return (
-    <div>
+    <div className="mt-3 mb-3 mr-5 ml-5">
       {loading ? (
         <LoadingSpinner />
       ) : (
@@ -47,7 +47,7 @@ function TeamList() {
                   style={{ cursor: "pointer" }}
                   key={teamObj._id}
                   onClick={() => {
-                    history.push(`/team/${teamObj._id}`);
+                    history.push(`/team/edit/${teamObj._id}`);
                   }}
                 >
                   <td>{teamObj.name}</td>

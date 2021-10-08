@@ -22,6 +22,7 @@ function TeamForm(props) {
   }, []);
 
   return (
+    <div className="ml-5 mr-5" >
     <form onSubmit={props.handleSubmit}>
       <TextInput
         label="name"
@@ -32,8 +33,8 @@ function TeamForm(props) {
       />
 
       <div className="row">
-        <div className="input-group mb-3">
-          <div className="input-group mb-3">
+        <div className="input-group mb-5">
+          <div className="input-group mb-3 mt-3">
             <label className="input-group-text" for="inputGroupSelect01">
               From:
             </label>
@@ -55,7 +56,7 @@ function TeamForm(props) {
           </div>
         </div>
 
-        <div className="col-auto">
+        <div className="col-5">
           <select
             className="form-select"
             id="inputGroupSelect02"
@@ -70,21 +71,22 @@ function TeamForm(props) {
           </select>
         </div>
 
-        <div className="col-auto">
+        <div className="col-5">
           <TextInput
             type="text"
-            label="captain"
-            id="teamFormPlayers"
-            name="players"
+            label="capitain"
+            id="teamFormCapitain"
+            name="capitain"
             onChange={props.handleChange}
-            value={props.state.description}
+            value={props.state.capitain}
           />
         </div>
 
         {props.loading ? (
           <LoadingSpinner />
         ) : (
-          <div className="w-100 text-end">
+          <div className="w-100 text-end mb-5">
+          <p></p>
             <button className="btn btn-primary">Salvar</button>
           </div>
         )}
@@ -92,6 +94,7 @@ function TeamForm(props) {
         {props.error ? <ErrorMessage /> : null}
       </div>
     </form>
+    </div>
   );
 }
 

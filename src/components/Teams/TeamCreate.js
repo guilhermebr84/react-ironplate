@@ -18,7 +18,11 @@ function TeamCreate() {
   const history = useHistory();
 
   function handleChange(event) {
-    setState({ ...state, [event.target.name]: event.target.value });
+    if (event.target.name === "players") {
+      let value = Array.from(event.target.selectedOptions, option => option.value);
+     return setState({ ...state, [event.target.name]: value });
+    }
+    return setState({ ...state, [event.target.name]: event.target.value });
   }
 
   async function handleSubmit(event) {
@@ -29,7 +33,7 @@ function TeamCreate() {
       .post("/team", state)
       .then(() => {
         setLoading(false);
-        history.push("/team");
+        history.push("/profile/team/teamlist");
       })
       .catch((err) => {
         console.error(err);
@@ -47,7 +51,7 @@ function TeamCreate() {
 
   return (
     <div>
-      <h1>Create New Team</h1>
+      <h1 className="mb-3">Create New Team</h1>
       <TeamForm
         handleChange={handleChange}
         handleSubmit={handleSubmit}

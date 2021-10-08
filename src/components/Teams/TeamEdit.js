@@ -23,7 +23,7 @@ function TeamEdit() {
     async function fetchTeams() {
       setLoading(true);
       try {
-        const response = await api.get(`/teams/${id}`);
+        const response = await api.get(`/team/${id}`);
 
         setState({ ...response.data });
         setLoading(false);
@@ -52,10 +52,10 @@ function TeamEdit() {
 
     setLoading(true);
     api
-      .patch(`/teams/${id}`, state)
+      .patch(`/team/${id}`, state)
       .then(() => {
         setLoading(false);
-        history.push("/teams");
+        history.push("/team/edit");
       })
       .catch((err) => {
         console.error(err);

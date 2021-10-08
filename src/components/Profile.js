@@ -5,7 +5,7 @@ import MatchCard from "../components/Matches/MatchCard";
 import MatchCreate from "../components/Matches/MatchCreate";
 import MatchDelete from "../components/Matches/MatchDelete";
 import MatchEdit from "../components/Matches/MatchEdit";
-import MatchForm from "../components/Matches/MatchForm";
+import TeamDetail from "../components/Teams/TeamDetail";
 import TeamCreate from "../components/Teams/TeamCreate";
 import TeamEdit from "../components/Teams/TeamEdit";
 import TeamList from "../components/Teams/TeamList";
@@ -17,11 +17,11 @@ function Profile() {
     <NavBar />
     <div></div>
       <Switch>
-        {/* <Route path="/matches/matchcard" component={MatchCard} />
-        <Route path="/matches/matchcreate" component={MatchCreate} />
-        <Route path="/matches/matchdelete" component={MatchDelete} />
-        <Route path="/matches/matchedit" component={MatchEdit} /> */}
-        <Route path="/profile/matches/matchform" component={MatchForm} />
+        <Route path="/profile/matches/matchcard" component={MatchCard} />
+        <Route path="/profile/matches/matchcreate" component={MatchCreate} />
+        <Route path="/profile/matches/matchdelete" component={MatchDelete} />
+        <Route path="/profile/matches/matchedit" component={MatchEdit} />
+        <Route path="/profile/team/teamdetail/:id" component={TeamDetail} />
         <Route path="/profile/team/teamcreate" component={TeamCreate} />
         <Route path="/profile/team/teamedit" component={TeamEdit} />
         <Route path="/profile/team/teamlist" component={TeamList} />

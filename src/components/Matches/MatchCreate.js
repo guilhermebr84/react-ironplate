@@ -1,57 +1,66 @@
-// import { useState, useContext } from "react";
+import { useState, useContext } from "react";
 
-// import TaskForm from "./TaskForm";
+import MatchForm from "./MatchForm";
 
-// import api from "../../apis/api";
-// import { authContext } from "../../contexts/authContext";
+import api from "../../apis/api";
+import { AuthContext } from "../../contexts/authContext";
 
-// function TaskCreate(props) {
-//   const [state, setState] = useState({
-//     description: "",
-//     status: "A fazer",
-//     startDate: new Date().toISOString().split("T")[0],
-//   });
+function MatchCreate(props) {
+  const [state, setState] = useState({
+    city: "",
+    addressMatch: "",
+    date: new Date().toISOString().split("T")[0],
+    hour: "",
+    teams: [],
+    pitchType: "INDOOR 5x5",
+    comments: "",
+    userOwnerId: ""
+  });
 
-//   const { loggedInUser } = useContext(authContext);
+  const { loggedInUser } = useContext(AuthContext);
 
-//   function handleChange(event) {
-//     setState({ ...state, [event.target.name]: event.target.value });
-//   }
+  function handleChange(event) {
+    setState({ ...state, [event.target.name]: event.target.value });
+  }
 
-//   async function handleSubmit(event) {
-//     event.preventDefault();
+  async function handleSubmit(event) {
+    event.preventDefault();
 
-//     try {
-//       const response = await api.post(`/task`, {
-//         ...state,
-//         taskOwner: loggedInUser.user._id,
-//         projectId: props.projectId,
-//       });
+    try {
+      const response = await api.post(`/matches`, {
+        ...state,
+        userOwnerId: loggedInUser.user._id,
+        teamId: props.teamId,
+      });
 
-//       console.log(response.data);
+      console.log(response.data);
 
-//       // Limpando o formulário após a criação
-//       setState({
-//         description: "",
-//         status: "A fazer",
-//         startDate: new Date(),
-//       });
+      setState({
+        city: "",
+        addressMatch: "",
+        date: new Date(),
+        hour: "",
+        name: [],
+        pitchType: "",
+        comments: "",
+        userOwnerId: ""
+      });
+    //   props.handleClose(false);
+      props.setMatchCreated(true);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
-//       props.handleClose(false);
-//       props.setTaskCreated(true);
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   }
+  return (
+    <MatchForm
+      value={state.pitchType}
+      state={state}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      buttonText="Schedule a Match"
+    />
+  );
+}
 
-//   return (
-//     <TaskForm
-//       state={state}
-//       handleChange={handleChange}
-//       handleSubmit={handleSubmit}
-//       buttonText="Criar Tarefa"
-//     />
-//   );
-// }
-
-// export default TaskCreate;
+export default MatchCreate;

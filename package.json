@@ -9,7 +9,7 @@
     "axios": "^0.21.4",
     "bootstrap": "^4.5.3",
     "react": "^17.0.1",
-    "react-bootstrap": "^1.4.0",
+    "react-bootstrap": "^1.6.4",
     "react-dom": "^17.0.1",
     "react-filtered-multiselect": "^0.5.1",
     "react-multi-select-component": "^4.1.13",
