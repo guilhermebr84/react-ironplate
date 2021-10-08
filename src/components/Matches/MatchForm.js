@@ -49,7 +49,7 @@ function MatchForm(props) {
           id="matchFormAdress"
           name="addressMatch"
           onChange={props.handleChange}
-          value={props.state.adressMatch}
+          value={props.state.addressMatch}
         />
         </div>
 
@@ -60,7 +60,7 @@ function MatchForm(props) {
           id="matchFormDate"
           name="date"
           onChange={props.handleChange}
-          value={props.state.date}
+          value={new Date(props.state.date).toISOString().split("T")[0]}
         />
         </div>
         

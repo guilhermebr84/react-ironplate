@@ -19,8 +19,8 @@ function Profile() {
       <Switch>
         <Route path="/profile/matches/matchcard" component={MatchCard} />
         <Route path="/profile/matches/matchcreate" component={MatchCreate} />
-        <Route path="/profile/matches/matchdelete" component={MatchDelete} />
-        <Route path="/profile/matches/matchedit" component={MatchEdit} />
+        <Route path="/profile/matches/matchdelete/:id" component={MatchDelete} />
+        <Route path="/profile/matches/matchedit/:id" component={MatchEdit} />
         <Route path="/profile/team/teamdetail/:id" component={TeamDetail} />
         <Route path="/profile/team/teamcreate" component={TeamCreate} />
         <Route path="/profile/team/teamedit" component={TeamEdit} />

@@ -1,11 +1,22 @@
+import { useState, useContext, useEffect } from "react";
 import api from "../../apis/api";
 
-async function MatchDelete(matchId, setMatchCreated) {
-  const result = await api.delete(`/matches/${matchId}`);
+function MatchDelete(props) {
+  const id = props.match.params.id;
 
-  setMatchCreated(true);
+  useEffect(() => {
+    async function fetchMatches() {
+      try {
+        const response = await api.delete(`/matches/delete/${id}`);
+        props.history.push("/profile/matches/matchcard");
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchMatches();
+  }, [id]);
 
-  return result;
+  return <div>Delete Ok!</div>;
 }
 
 export default MatchDelete;

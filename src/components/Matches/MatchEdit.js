@@ -12,16 +12,24 @@ function MatchEdit(props) {
     date: new Date().toISOString().split("T")[0],
     hour: "",
     teams: [],
-    pitchType: [],
+    pitchType: "INDOOR 5x5",
     comments: "",
-    userOwnerId:""
+    userOwnerId: ""
   });
 
   const { loggedInUser } = useContext(AuthContext);
+  const id = props.match.params.id
 
   useEffect(() => {
-    setState({ ...props.state });
-  }, [props.state]);
+    async function fetchMatches() {
+      try {
+        const response = await api.get(`/matches/${id}`);
+        setState({ ...response.data });
+        console.log(response.data);
+    } catch (err) {
+        console.error(err);
+    }}
+  fetchMatches();}, [id]);
 
   function handleChange(event) {
     setState({ ...state, [event.target.name]: event.target.value });
@@ -31,28 +39,15 @@ function MatchEdit(props) {
     event.preventDefault();
 
     try {
-      const response = await api.patch(`/match/edit/${props.state._id}`, {
+      const response = await api.patch(`/matches/edit/${id}`, {
         ...state,
-        matchOwner: loggedInUser.user._id,
-        teamId: props.teamId,
+        userOwnerId: loggedInUser.user._id,
       });
 
       console.log(response.data);
-
-      setState({
-        city: "",
-        addressMatch: "",
-        date: new Date().toISOString().split("T")[0],
-        hour: "",
-        teams: [],
-        pitchType: [],
-        comments: "",
-        userOwnerId:""
-      });
-
-      props.handleClose(false);
-      props.setTaskCreated(true);
-    } catch (err) {
+      
+      props.history.push("/profile/matches/matchcard")
+     } catch (err) {
       console.error(err);
     }
   }
